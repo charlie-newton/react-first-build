@@ -1,0 +1,13 @@
+footer {
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-top: 1px solid #72bd59;
+    background: #72bd59;
+}
+
+footer a {
+    font-size: 70%;
+    text-decoration: none;
+    color: #477936;
+}
