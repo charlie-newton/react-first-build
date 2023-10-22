@@ -4,6 +4,10 @@ header {
     display: flex;
 }
 
+header a {
+    text-decoration: none;
+}
+
 header a img {
     filter: invert(1);
     margin-left: 10px;
