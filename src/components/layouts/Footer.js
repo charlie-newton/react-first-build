@@ -8,7 +8,7 @@ function Footer() {
     // View --------------------
     return (
         <footer>
-            <a href="https://icons8.com/icon/85327/expand-arrow">
+            <a href="https://img.icons8.com/ios/50/expand-arrow--v1.png">
                 Images by Icons8
             </a>
         </footer>

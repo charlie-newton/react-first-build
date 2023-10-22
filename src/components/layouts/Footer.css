@@ -2,12 +2,12 @@ footer {
     height: 50px;
     display: grid;
     place-items: center;
-    border-top: 1px solid #72bd59;
-    background: #72bd59;
+    border-top: 1px solid #77cc5d;
+    background: #77cc5d;
 }
 
 footer a {
     font-size: 70%;
     text-decoration: none;
-    color: #477936;
+    color: white;
 }
