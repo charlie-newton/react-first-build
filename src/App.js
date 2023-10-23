@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
+import Projects from "./components/layouts/Projects.js";
 import ContactUs from "./components/pages/ConactUs";
 import PageNotFound from "./components/pages/PageNotFound";
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />}/>
           <Route path="/signin" element={<SignIn />}/>
+          <Route path="/projects" element={<Projects />}/>
           <Route path="/contact" element={<ContactUs />}/>
           <Route path="*" element={<PageNotFound />}/>
         </Routes>
