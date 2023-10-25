@@ -1,0 +1,15 @@
+div.projectCard {
+  width: 350px;
+  height: 110px;
+}
+
+div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.projectName {
+  font-size: 175%;
+  padding-bottom: 25px;
+}

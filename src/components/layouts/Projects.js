@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import API from "../../api/api.js";
 import callFetch from "../../api/api.js";
+import { CardContainer } from "../UI/Card.js";
+import ProjectCard from "../entity/ProjectCard.js";
 
 export default function Projects() {
     // Initialisation --------------
@@ -31,8 +33,12 @@ export default function Projects() {
                     ? <p>{loadingMessage}</p>
                 : projects.length === 0
                     ? <p>No projects found.</p>
-                : projects.map((project) =>
-                    <p key={project.projectID}>({project.projectID}) {project.projectName}: {project.projectDescription}</p>
+                : (
+                <CardContainer>
+                    {projects.map((project) =>
+                    <ProjectCard project={project} key={project.projectID} />
+                )}
+                </CardContainer>
                 )
             }
         </section>
