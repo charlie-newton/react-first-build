@@ -3,13 +3,16 @@ div.projectCard {
   height: 110px;
 }
 
-div {
+.projectName {
+  font-size: 175%;
+  padding-bottom: 25px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.projectName {
-  font-size: 175%;
-  padding-bottom: 25px;
+.projectDescription {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
