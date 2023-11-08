@@ -6,7 +6,7 @@ import ProjectCard from "../entity/ProjectCard.js";
 
 export default function Projects() {
     // Initialisation --------------
-    const loggedInUserID = 10;
+    const loggedInUserID = 5;
     const endpoint = `/projects/users/${loggedInUserID}`;
 
     // State -------------------
