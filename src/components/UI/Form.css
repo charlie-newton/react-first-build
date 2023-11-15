@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Sometype+Mono:wght@500&display=swap');
+
+.FormItem {
+    margin: 5px;
+
+    .FormLabel {
+        font-weight: bold;
+    }
+
+    .FormAdvice {
+        font-style: italic;
+    }
+
+    .FormError {
+        color: red;
+    }
+}

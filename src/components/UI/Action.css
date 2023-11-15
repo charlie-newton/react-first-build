@@ -1,0 +1,19 @@
+div.actionAdd {
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 5px;
+        margin: 10px;
+
+        background: none;
+        cursor: pointer;
+        border: 1px solid LightGray;
+        border-radius: 5px;
+        width: max-content;
+
+        img {
+            padding-right: 5px;
+        }
+    }
+}

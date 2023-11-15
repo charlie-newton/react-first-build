@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Card } from '../UI/Card.js';
+import { Card } from '../../UI/Card.js';
 import './ProjectCard.css';
 
 function ProjectCard({ project }) {

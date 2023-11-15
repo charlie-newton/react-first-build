@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import API from "../../api/api.js";
 import callFetch from "../../api/api.js";
+import { ActionAdd } from "../UI/Action.js";
 import { CardContainer } from "../UI/Card.js";
-import ProjectCard from "../entity/ProjectCard.js";
+import ProjectCard from "../entities/projects/ProjectCard.js";
+import ProjectForm from "../entities/projects/ProjectForm.js";
 
 export default function Projects() {
     // Initialisation --------------
@@ -13,6 +15,8 @@ export default function Projects() {
     const [projects, setProjects] = useState(null);
     const [loadingMessage, setLoadingMessage] = useState("Loading records...");
 
+    const [showNewProjectForm, setShowNewProjectForm] = useState(false);
+
     // Context -----------------
     // Methods -----------------
     const apiCall = async (endpoint) => {
@@ -21,6 +25,8 @@ export default function Projects() {
             ? setProjects(response.result)
             : setLoadingMessage(response.message)
     };
+
+    const handleAdd = () => setShowNewProjectForm(!showNewProjectForm);
 
     useEffect(() => { apiCall(endpoint) }, [endpoint]);
 
@@ -34,11 +40,18 @@ export default function Projects() {
                 : projects.length === 0
                     ? <p>No projects found.</p>
                 : (
-                <CardContainer>
-                    {projects.map((project) =>
-                    <ProjectCard project={project} key={project.projectID} />
-                )}
-                </CardContainer>
+                <div>
+                    <ActionAdd showText onClick={handleAdd} buttonText="Create new project"/>
+                    {
+                        showNewProjectForm && <ProjectForm />
+                    }
+
+                    <CardContainer>                    
+                        {projects.map((project) =>
+                        <ProjectCard project={project} key={project.projectID} />
+                        )}
+                    </CardContainer>
+                </div>
                 )
             }
         </section>
