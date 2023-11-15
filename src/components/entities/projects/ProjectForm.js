@@ -9,13 +9,26 @@ const emptyProject = {
 
 function ProjectForm({ intitalProject=emptyProject }) {
   // Initialisation ------------------------------
+  const isValid = {
+    projectName: (name) => name.length > 8,
+    projectDescription: (name) => name.length > 10
+  }
+  const errorMessage = {
+    projectName: "Project name is too short",
+    projectDescription: "Project description is too short"
+  }
+
   // State ---------------------------------------
   const [project, setProject] = useState(intitalProject);
+  const [errors, setErrors] = useState(
+    Object.keys(intitalProject).reduce((accum,key) => ({...accum, [key]: null}),{})
+  );
   // Handlers ------------------------------------
   const handleChange = (event) => {
     const { name, value } = event.target;
     const newValue = value;
     setProject({ ...project, [name]: newValue });
+    setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name]});
   }
 
   // View ----------------------------------------
@@ -25,7 +38,7 @@ function ProjectForm({ intitalProject=emptyProject }) {
         label="Project Name"
         htmlFor="ProjectName"
         advice="Enter project name..."
-        error={null}
+        error={errors.projectName}
       >
         <input
           type="text"
@@ -39,7 +52,7 @@ function ProjectForm({ intitalProject=emptyProject }) {
         label="Project Description"
         htmlFor="ProjectDescription"
         advice="Enter project description..."
-        error={null}
+        error={errors.projectDescription}
       >
         <input
           type="text"
