@@ -1,13 +1,14 @@
 import { useState } from "react";
 import './ProjectForm.css';
 import FormItem from "../../UI/Form.js";
+import { ActionSubmit } from "../../UI/Action.js";
 
 const emptyProject = {
     projectName: "Default title",
     projectDescription: "Default description"
 };
 
-function ProjectForm({ intitalProject=emptyProject }) {
+function ProjectForm({ onSubmit, onDismiss, intitalProject=emptyProject }) {
   // Initialisation ------------------------------
   const isValid = {
     projectName: (name) => name.length > 8,
@@ -31,37 +32,60 @@ function ProjectForm({ intitalProject=emptyProject }) {
     setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name]});
   }
 
+  const isValidProject = (project) => {
+    let isProjectValid = true;
+    Object.keys(project).forEach((key) => {
+      if(isValid[key](project[key])) {
+        errors[key] = null;
+      } else {
+        errors[key] = errorMessage[key];
+        isProjectValid = false;
+      }
+    });
+    return isProjectValid;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    isValidProject(project) && onSubmit(project) && onDismiss();
+    setErrors({...errors});
+  };
+
   // View ----------------------------------------
   return (
-    <form>
-      <FormItem
-        label="Project Name"
-        htmlFor="ProjectName"
-        advice="Enter project name..."
-        error={errors.projectName}
-      >
-        <input
-          type="text"
-          name="projectName"
-          value={project.projectName}
-          onChange={handleChange}
-        />
-      </FormItem>
+    <div className="formContainer">
+      <form>
+        <FormItem
+          label="Project Name"
+          htmlFor="ProjectName"
+          advice="Enter project name..."
+          error={errors.projectName}
+        >
+          <input
+            type="text"
+            name="projectName"
+            value={project.projectName}
+            onChange={handleChange}
+          />
+        </FormItem>
 
-      <FormItem
-        label="Project Description"
-        htmlFor="ProjectDescription"
-        advice="Enter project description..."
-        error={errors.projectDescription}
-      >
-        <input
-          type="text"
-          name="projectDescription"
-          value={project.projectDescription}
-          onChange={handleChange}
-        />
-      </FormItem>
-    </form>
+        <FormItem
+          label="Project Description"
+          htmlFor="ProjectDescription"
+          advice="Enter project description..."
+          error={errors.projectDescription}
+        >
+          <input
+            type="text"
+            name="projectDescription"
+            value={project.projectDescription}
+            onChange={handleChange}
+          />
+        </FormItem>
+
+        <ActionSubmit onClick={handleSubmit} buttonText="Submit" />
+      </form>
+    </div>
   );
 }
 

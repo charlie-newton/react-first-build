@@ -1,19 +1,26 @@
-div.actionAdd {
+.actionAdd {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
 
-    button {
-        padding: 5px;
-        margin: 10px;
+.actionSubmit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+button {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+    background: none;
+    cursor: pointer;
+    border: 1px solid LightGray;
+    border-radius: 5px;
 
-        background: none;
-        cursor: pointer;
-        border: 1px solid LightGray;
-        border-radius: 5px;
-        width: max-content;
-
-        img {
-            padding-right: 5px;
-        }
+    img {
+        padding-right: 5px;
     }
 }

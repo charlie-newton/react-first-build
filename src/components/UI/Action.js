@@ -12,6 +12,17 @@ export function ActionAdd(props) {
   );
 }
 
+export function ActionSubmit(props) {
+  return (
+    <div className="actionSubmit">
+      <button onClick={props.onClick}>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAR0lEQVR4nGNgGAVUBkcZGBgOM9AQ/IfiUQtwgv+jQUTzIDqKZAi5+DA+Cw5TwYJDlPjw/2gqIgT+jwbRgAfRYUrT+ShgQAcAP99B32IiK8kAAAAASUVORK5CYII=" align="left" />
+        <div>{props.buttonText}</div>
+      </button>
+    </div>
+  );
+}
+
 ActionAdd.propTypes = {
   children: PropTypes.node,
 };

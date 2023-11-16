@@ -9,6 +9,7 @@ import ProjectForm from "../entities/projects/ProjectForm.js";
 export default function Projects() {
     // Initialisation --------------
     const loggedInUserID = 5;
+
     const endpoint = `/projects/users/${loggedInUserID}`;
 
     // State -------------------
@@ -19,16 +20,24 @@ export default function Projects() {
 
     // Context -----------------
     // Methods -----------------
-    const apiCall = async (endpoint) => {
-        const response = await API.get(endpoint);
+    const getProjects = async () => {
+        const response = await API.get(`/projects/users/${loggedInUserID}`);
         response.isSuccess
             ? setProjects(response.result)
             : setLoadingMessage(response.message)
     };
 
     const handleAdd = () => setShowNewProjectForm(!showNewProjectForm);
+    const handleDismiss = () => setShowNewProjectForm(false);
 
-    useEffect(() => { apiCall(endpoint) }, [endpoint]);
+    const handleSubmit = async (project) => {
+        const response = await API.post(endpoint, project);
+        return response.isSuccess
+            ? getProjects() || true
+            : false;
+    };
+
+    useEffect(() => { getProjects() }, []);
 
     // View --------------------
     return (
@@ -43,7 +52,7 @@ export default function Projects() {
                 <div>
                     <ActionAdd showText onClick={handleAdd} buttonText="Create new project"/>
                     {
-                        showNewProjectForm && <ProjectForm />
+                        showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onDismiss={handleDismiss} />
                     }
 
                     <CardContainer>                    
