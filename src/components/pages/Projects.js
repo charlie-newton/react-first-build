@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import API from "../../api/api.js";
-import callFetch from "../../api/api.js";
 import useLoad from "../../api/useLoad.js";
 
 import { ActionAdd } from "../UI/Actions.js";
@@ -14,8 +13,7 @@ export default function Projects() {
     const endpoint = `/projects/users/${loggedInUserID}`;
 
     // State -----------------
-    const [projects, setProjects, loadingMessage, loadProjects] = useLoad(endpoint);
-
+    const [projects, , loadingMessage, loadProjects] = useLoad(endpoint);
     const [showNewProjectForm, setShowNewProjectForm] = useState(false);
 
     // Context -----------------
@@ -25,11 +23,12 @@ export default function Projects() {
     const handleDismiss = () => setShowNewProjectForm(false);
 
     const handleSubmit = async (project) => {
+        project.preventDefault();
         const response = await API.post(endpoint, project);
         return response.isSuccess
             ? loadProjects(endpoint) || true
             : false;
-    };
+    }
 
     // View --------------------
     return (
@@ -44,7 +43,7 @@ export default function Projects() {
                 <div>
                     <ActionAdd showText onClick={handleAdd} buttonText="Create new project"/>
                     {
-                        showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onDismiss={handleDismiss} />
+                        showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} />
                     }
 
                     <CardContainer>                    

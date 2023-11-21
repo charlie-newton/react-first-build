@@ -19,9 +19,9 @@ function ProjectCard({ project }) {
 
 ProjectCard.propTypes = {
   project: PropTypes.shape({
-    projectID: PropTypes.string.isRequired,
+    projectID: PropTypes.number.isRequired,
     projectName: PropTypes.string.isRequired,
-    ProjectDescription: PropTypes.string.isRequired,
+    ProjectDescription: PropTypes.string,
   }),
 };
 
