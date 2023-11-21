@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import API from "../../api/api.js";
 import callFetch from "../../api/api.js";
-import { ActionAdd } from "../UI/Action.js";
+import useLoad from "../../api/useLoad.js";
+
+import { ActionAdd } from "../UI/Actions.js";
 import { CardContainer } from "../UI/Card.js";
 import ProjectCard from "../entities/projects/ProjectCard.js";
 import ProjectForm from "../entities/projects/ProjectForm.js";
@@ -9,23 +11,15 @@ import ProjectForm from "../entities/projects/ProjectForm.js";
 export default function Projects() {
     // Initialisation --------------
     const loggedInUserID = 5;
-
     const endpoint = `/projects/users/${loggedInUserID}`;
 
-    // State -------------------
-    const [projects, setProjects] = useState(null);
-    const [loadingMessage, setLoadingMessage] = useState("Loading records...");
+    // State -----------------
+    const [projects, setProjects, loadingMessage, loadProjects] = useLoad(endpoint);
 
     const [showNewProjectForm, setShowNewProjectForm] = useState(false);
 
     // Context -----------------
     // Methods -----------------
-    const getProjects = async () => {
-        const response = await API.get(`/projects/users/${loggedInUserID}`);
-        response.isSuccess
-            ? setProjects(response.result)
-            : setLoadingMessage(response.message)
-    };
 
     const handleAdd = () => setShowNewProjectForm(!showNewProjectForm);
     const handleDismiss = () => setShowNewProjectForm(false);
@@ -33,11 +27,9 @@ export default function Projects() {
     const handleSubmit = async (project) => {
         const response = await API.post(endpoint, project);
         return response.isSuccess
-            ? getProjects() || true
+            ? loadProjects(endpoint) || true
             : false;
     };
-
-    useEffect(() => { getProjects() }, []);
 
     // View --------------------
     return (

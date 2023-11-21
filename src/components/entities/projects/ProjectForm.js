@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './ProjectForm.css';
-import FormItem from "../../UI/Form.js";
-import { ActionSubmit } from "../../UI/Action.js";
+import Form from "../../UI/Form.js";
+import { ActionSubmit } from "../../UI/Actions.js";
 
 const emptyProject = {
     projectName: "Default title",
@@ -53,39 +53,35 @@ function ProjectForm({ onSubmit, onDismiss, intitalProject=emptyProject }) {
 
   // View ----------------------------------------
   return (
-    <div className="formContainer">
-      <form>
-        <FormItem
-          label="Project Name"
-          htmlFor="ProjectName"
-          advice="Enter project name..."
-          error={errors.projectName}
-        >
-          <input
-            type="text"
-            name="projectName"
-            value={project.projectName}
-            onChange={handleChange}
-          />
-        </FormItem>
+    <Form onSubmit={handleSubmit} onCancel={onDismiss}>
+      <Form.Item
+        label="Project Name"
+        htmlFor="ProjectName"
+        advice="Enter project name..."
+        error={errors.projectName}
+      >
+        <input
+          type="text"
+          name="projectName"
+          value={project.projectName}
+          onChange={handleChange}
+        />
+      </Form.Item>
 
-        <FormItem
-          label="Project Description"
-          htmlFor="ProjectDescription"
-          advice="Enter project description..."
-          error={errors.projectDescription}
-        >
-          <input
-            type="text"
-            name="projectDescription"
-            value={project.projectDescription}
-            onChange={handleChange}
-          />
-        </FormItem>
-
-        <ActionSubmit onClick={handleSubmit} buttonText="Submit" />
-      </form>
-    </div>
+      <Form.Item
+        label="Project Description"
+        htmlFor="ProjectDescription"
+        advice="Enter project description..."
+        error={errors.projectDescription}
+      >
+        <input
+          type="text"
+          name="projectDescription"
+          value={project.projectDescription}
+          onChange={handleChange}
+        />
+      </Form.Item>
+    </Form>
   );
 }
 
