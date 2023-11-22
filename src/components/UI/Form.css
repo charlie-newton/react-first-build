@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Sometype+Mono:wght@500&display=swap');
 
-form {
-    display: inline-block;
+.borderedForm {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    border: 1px solid LightGray;
+    border-radius: 5px;
+    margin-bottom: 25px;
 }
 
 .FormItem {
@@ -18,4 +25,8 @@ form {
     .FormError {
         color: red;
     }
+}
+
+.buttonHolder {
+    display: block;
 }

@@ -21,7 +21,7 @@ export default function Form({children, onSubmit, onCancel}) {
             </div>
             
             <ActionTray>
-                <ActionAdd onClick={handleSubmit} showText buttonText="Submit" />
+                <ActionSubmit onClick={handleSubmit} showText buttonText="Submit" />
             </ActionTray>
         </div>
     );
@@ -46,7 +46,7 @@ function Item({ children, label, htmlFor, advice, error }) {
             {
                 error && <p className="FormError">{error}</p>
             }
-            <br /><br />
+            <br />
         </div>
     );
 }

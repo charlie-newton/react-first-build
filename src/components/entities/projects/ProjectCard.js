@@ -11,7 +11,9 @@ function ProjectCard({ project }) {
     <div className="projectCard">
       <Card>
         <div className="projectName">{project.projectName}</div>
-        <img className="projectImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Aspect_ratio_-_16x9.svg/2560px-Aspect_ratio_-_16x9.svg.png"/>
+        <div className="imageHolder">
+          <img className="projectImage" src={project.projectImage}/>
+        </div>
       </Card>
     </div>
   );
