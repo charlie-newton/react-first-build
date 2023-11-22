@@ -17,11 +17,5 @@ div.cardContainer {
       border-radius: 5px;
       box-shadow: 4px 4px 8px 4px rgba(70, 70, 70, 0.3);
       overflow: hidden;
-  
-      img {
-        width: 100%;
-        display: block;
-        border-radius: 0px 0px 3px 3px;
-      }
     }
   }

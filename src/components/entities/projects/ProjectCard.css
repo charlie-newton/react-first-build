@@ -5,7 +5,7 @@ div.projectCard {
 
 .projectName {
   font-size: 175%;
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -15,7 +15,6 @@ div.projectCard {
   height: 100%;
   object-fit: contain;
   padding-bottom: 40px;
-  border-radius: 5px;
 }
 
 .projectDescription {

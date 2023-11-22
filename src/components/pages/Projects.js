@@ -23,7 +23,6 @@ export default function Projects() {
     const handleDismiss = () => setShowNewProjectForm(false);
 
     const handleSubmit = async (project) => {
-        project.preventDefault();
         const response = await API.post(endpoint, project);
         return response.isSuccess
             ? loadProjects(endpoint) || true

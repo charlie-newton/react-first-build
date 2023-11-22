@@ -8,12 +8,12 @@ export default function Form({children, onSubmit, onCancel}) {
     // State --------------------------------------------
     // Context ------------------------------------------
     // Handlers -----------------------------------------
-    const handleSubmit = () => onSubmit;
-    const handleCancel = () => onCancel;
+    const handleSubmit = () => onSubmit();
+    const handleCancel = () => onCancel();
 
     // View ---------------------------------------------
     return (
-        <form className="borderedForm">
+        <div className="borderedForm">
             <div className="formTray">
                 {
                     children
@@ -21,9 +21,9 @@ export default function Form({children, onSubmit, onCancel}) {
             </div>
             
             <ActionTray>
-                <ActionSubmit showText onClick={handleSubmit} buttonText="Submit" />
+                <ActionAdd onClick={handleSubmit} showText buttonText="Submit" />
             </ActionTray>
-        </form>
+        </div>
     );
 }
 
@@ -80,8 +80,7 @@ function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit, 
         return isRecordValid;
     };
     
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
         isValidRecord(record) && onSubmit(record) && onCancel();
         setErrors({...errors});
     };
