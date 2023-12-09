@@ -13,8 +13,4 @@ button {
     cursor: pointer;
     border: 1px solid LightGray;
     border-radius: 5px;
-
-    img {
-        padding-right: 5px;
-    }
 }

@@ -2,7 +2,13 @@ div.projectCard {
   width: 350px;
   height: 250px;
 }
+.topRow {
+  display: flex;
+}
 
+.buttonContainer {
+  margin-left: auto;
+}
 .projectName {
   font-size: 175%;
   text-overflow: ellipsis;

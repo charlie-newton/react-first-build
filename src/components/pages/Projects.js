@@ -15,24 +15,42 @@ export default function Projects() {
     // State -----------------
     const [projects, , loadingMessage, loadProjects] = useLoad(endpoint);
     const [showNewProjectForm, setShowNewProjectForm] = useState(false);
+    const [showUpdateProjectForm, setShowUpdateProjectForm] = useState(false);
 
     // Context -----------------
     // Methods -----------------
+    const toggleAdd = () => {
+        setShowNewProjectForm(!showNewProjectForm);
+        setShowUpdateProjectForm(false);
+    }
+    const toggleUpdate = () => {
+        setShowUpdateProjectForm(!showUpdateProjectForm);
+        setShowNewProjectForm(false);
+    }    
+    const handleDismiss = () => {
+        setShowNewProjectForm(false);
+        setShowUpdateProjectForm(false);
+    }
 
-    const handleAdd = () => setShowNewProjectForm(!showNewProjectForm);
-    const handleDismiss = () => setShowNewProjectForm(false);
-
+    const handleModify = () => { }
+    const handleDelete = () => { }
     const handleSubmit = async (project) => {
         const response = await API.post(endpoint, project);
         return response.isSuccess
             ? loadProjects(endpoint) || true
             : false;
     }
+    const handleCancel = () => { }
 
     // View --------------------
     return (
         <section>
             <h1>My Projects</h1>
+            <ActionAdd showText onClick={toggleAdd} buttonText="Create new project"/>
+
+            { showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} /> }
+            { showUpdateProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} intitalProject={null} /> }
+
             {
                 !projects
                     ? <p>{loadingMessage}</p>
@@ -40,15 +58,10 @@ export default function Projects() {
                     ? <p>No projects found.</p>
                 : (
                 <div>
-                    <ActionAdd showText onClick={handleAdd} buttonText="Create new project"/>
-                    {
-                        showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} />
-                    }
-
-                    <CardContainer>                    
+                    <CardContainer> 
                         {projects.map((project) =>
-                        <ProjectCard project={project} key={project.projectID} />
-                        )}
+                            <ProjectCard project={project} handleModify={handleModify} handleDelete={handleDelete} key={project.projectID} />
+                        )}                   
                     </CardContainer>
                 </div>
                 )
