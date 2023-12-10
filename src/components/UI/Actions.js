@@ -1,28 +1,13 @@
 import PropTypes from "prop-types";
 import "./Actions.css";
 
-ActionTray.propTypes = {
-  children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ]).isRequired
-}
-
-export function ActionTray({children}) {
-  return (
-    <div className="actionTray">
-      { children }
-    </div>
-  );
-}
-
 ActionButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   showText: PropTypes.bool,
   buttonText: PropTypes.string.isRequired
 };
 
-function ActionButton({ children, onClick, showText, buttonText }) {
+export default function ActionButton({ children, onClick, showText, buttonText }) {
   return(
     <div className="buttonContainer">
       <button className="actionButton" onClick={onClick}>
@@ -32,12 +17,37 @@ function ActionButton({ children, onClick, showText, buttonText }) {
   );
 }
 
+Tray.propTypes = {
+  children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+  ]).isRequired
+}
+
+export function Tray({children}) {
+  return (
+    <div className="ActionTray">
+      { children }
+    </div>
+  );
+}
+
+ActionButton.Tray = Tray;
+
 // Actions ----------------------------------------------------------------------
 
 const actionPropTypes = {
   onClick: PropTypes.func.isRequired,
   showText: PropTypes.bool
 };
+
+GenericAction.propTypes = actionPropTypes;
+
+export function GenericAction({onClick, showText=true, buttonText=null}) {
+  return (
+    <ActionButton buttonText={buttonText || ""} onClick={onClick} showText={showText} />
+  );
+}
 
 ActionAdd.propTypes = actionPropTypes;
 

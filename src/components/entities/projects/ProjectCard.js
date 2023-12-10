@@ -3,13 +3,12 @@ import { Card } from '../../UI/Card.js';
 import './ProjectCard.css';
 import { ActionUpdate, ActionDelete } from '../../UI/Actions.js';
 
-function ProjectCard({ project, toggleModify, onModify, onDelete }) {
+function ProjectCard({ project, toggleModify, onDelete }) {
   // Initialisation ------------------------------
   // State ---------------------------------------
   // Handlers ------------------------------------
   const setModifyForm = () => toggleModify(project);
-  const handleModify = () => onModify();
-  const handleDelete = () => onDelete();
+  const handleDelete = () => onDelete(project.projectID);
   // View ----------------------------------------
   return (
     <div className="projectCard">

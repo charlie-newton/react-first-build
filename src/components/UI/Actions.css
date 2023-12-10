@@ -7,9 +7,24 @@
 button {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 3px;
     background: none;
     cursor: pointer;
     border: 1px solid LightGray;
     border-radius: 5px;
+}
+
+div.ActionTray {
+    /* Appearance */
+    margin: 10px 0px 0px 0px;
+  
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        padding: 5px;
+    }
 }

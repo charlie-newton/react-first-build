@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Form.css";
-import { ActionTray, ActionAdd, ActionSubmit } from "./Actions.js";
+import Actions from "./Actions.js";
+import { ActionAdd, ActionSubmit } from "./Actions.js";
 
 export default function Form({children, onSubmit, onCancel}) {
     // Initialisation -----------------------------------
@@ -20,9 +21,9 @@ export default function Form({children, onSubmit, onCancel}) {
                 }
             </div>
             
-            <ActionTray>
+            <Actions.Tray>
                 <ActionSubmit onClick={handleSubmit} showText buttonText="Submit" />
-            </ActionTray>
+            </Actions.Tray>
         </div>
     );
 }
