@@ -7,7 +7,7 @@ const emptyProject = {
     projectDeadline: (new Date().getFullYear() + 1) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
 };
 
-function ProjectForm({ onSubmit, onCancel, intitalProject=emptyProject }) {
+function ProjectForm({ onSubmit, onCancel, initialProject=emptyProject }) {
   // Initialisation ------------------------------
   const validation = {
     isValid: {
@@ -27,7 +27,7 @@ function ProjectForm({ onSubmit, onCancel, intitalProject=emptyProject }) {
   const conformance = [];
 
   // State ---------------------------------------
-  const [project, errors, handleChange, handleSubmit] = Form.useForm(intitalProject, conformance, validation, onSubmit, onCancel);
+  const [project, errors, handleChange, handleSubmit] = Form.useForm(initialProject, conformance, validation, onSubmit, onCancel);
 
   // Handlers ------------------------------------
   // View ----------------------------------------

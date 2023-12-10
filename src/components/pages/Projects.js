@@ -10,12 +10,14 @@ import ProjectForm from "../entities/projects/ProjectForm.js";
 export default function Projects() {
     // Initialisation --------------
     const loggedInUserID = 5;
-    const endpoint = `/projects/users/${loggedInUserID}`;
+    const postEndpoint = `/projects/users/${loggedInUserID}`;
+    const putEndpoint = `/projects/`;
 
     // State -----------------
-    const [projects, , loadingMessage, loadProjects] = useLoad(endpoint);
+    const [projects, , loadingMessage, loadProjects] = useLoad(postEndpoint);
     const [showNewProjectForm, setShowNewProjectForm] = useState(false);
     const [showUpdateProjectForm, setShowUpdateProjectForm] = useState(false);
+    const [modifiedProject, setModifiedProject] = useState(null);
 
     // Context -----------------
     // Methods -----------------
@@ -23,21 +25,30 @@ export default function Projects() {
         setShowNewProjectForm(!showNewProjectForm);
         setShowUpdateProjectForm(false);
     }
-    const toggleUpdate = () => {
-        setShowUpdateProjectForm(!showUpdateProjectForm);
-        setShowNewProjectForm(false);
+    const toggleUpdate = (project) => {
+        setModifiedProject(project);
+        if(project === modifiedProject || !showUpdateProjectForm) {
+            setShowUpdateProjectForm(!showUpdateProjectForm);
+            setShowNewProjectForm(false);
+        }
     }    
     const handleDismiss = () => {
         setShowNewProjectForm(false);
         setShowUpdateProjectForm(false);
     }
 
-    const handleModify = () => { }
+    const handleModify = async (project) => {
+        console.log(modifiedProject.projectID);
+        const response = await API.put(putEndpoint + modifiedProject.projectID, project);
+        return response.isSuccess
+            ? loadProjects(postEndpoint) || true
+            : false;
+    }
     const handleDelete = () => { }
     const handleSubmit = async (project) => {
-        const response = await API.post(endpoint, project);
+        const response = await API.post(postEndpoint, project);
         return response.isSuccess
-            ? loadProjects(endpoint) || true
+            ? loadProjects(postEndpoint) || true
             : false;
     }
     const handleCancel = () => { }
@@ -49,7 +60,7 @@ export default function Projects() {
             <ActionAdd showText onClick={toggleAdd} buttonText="Create new project"/>
 
             { showNewProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} /> }
-            { showUpdateProjectForm && <ProjectForm onSubmit={handleSubmit} onCancel={handleDismiss} intitalProject={null} /> }
+            { showUpdateProjectForm && <ProjectForm onSubmit={handleModify} onCancel={handleDismiss} initialProject={modifiedProject} /> }
 
             {
                 !projects
@@ -60,7 +71,7 @@ export default function Projects() {
                 <div>
                     <CardContainer> 
                         {projects.map((project) =>
-                            <ProjectCard project={project} handleModify={handleModify} handleDelete={handleDelete} key={project.projectID} />
+                            <ProjectCard project={project} toggleModify={toggleUpdate} onModify={handleModify} onDelete={handleDelete} key={project.projectID} />
                         )}                   
                     </CardContainer>
                 </div>

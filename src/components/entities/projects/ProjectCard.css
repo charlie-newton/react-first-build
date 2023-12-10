@@ -4,10 +4,15 @@ div.projectCard {
 }
 .topRow {
   display: flex;
+  margin: -5px 0px 5px 0px;
 }
 
 .buttonContainer {
   margin-left: auto;
+
+  button {
+    margin: 0px 0px 0px 5px;
+  }
 }
 .projectName {
   font-size: 175%;

@@ -70,11 +70,13 @@ function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit, 
     const isValidRecord = (record) => {
         let isRecordValid = true;
         Object.keys(record).forEach((key) => {
-            if(isValid[key](record[key])) {
-                errors[key] = null;
-            } else {
-                errors[key] = errorMessage[key];
-                isRecordValid = false;
+            if(key != "projectID") {
+                if(isValid[key](record[key])) {
+                    errors[key] = null;
+                } else {
+                    errors[key] = errorMessage[key];
+                    isRecordValid = false;
+                }
             }
         });
         return isRecordValid;
